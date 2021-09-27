@@ -1,0 +1,34 @@
+#include <iostream>
+#include <climits>
+using namespace std;
+
+int longest_sum_increasing_subsequence(int a[],int n);
+
+int main(){
+    int arr[]={1,101,2,3,100,4,5};
+    int n=sizeof(arr)/sizeof(arr[0]);
+    int value=longest_sum_increasing_subsequence(arr,n);
+    cout<<value<<endl;
+    return 0;
+}
+
+int longest_sum_increasing_subsequence(int a[],int n){
+    int b[n];
+    int sum_value=INT_MIN;
+    for(int i=0;i<n;i++){
+        b[i]=a[i];
+    }
+    for(int i=1;i<n;i++){
+        for(int j=0;j<i;j++){
+            if(a[i]>a[j]){
+                if(b[i]<(b[j]+a[i])){
+                    b[i]=b[j]+a[i];
+                }
+            }
+        }
+    }
+    for(int i=0;i<n;i++){
+        sum_value=max(sum_value,b[i]);
+    }
+    return sum_value;
+}
